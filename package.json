@@ -1,14 +1,25 @@
 {
   "name": "@sinch/n8n-nodes-number-lookup-api",
   "version": "0.1.0",
-  "description": "sinch number lookup api",
+  "description": "n8n community node for Sinch Number Lookup API - validate and verify phone numbers with real-time carrier, porting, SIM swap, and VoIP detection",
   "license": "MIT",
-  "homepage": "",
-  "keywords": ["n8n-community-node-package"],
+  "homepage": "https://github.com/sinch/n8n-nodes-number-lookup-api#readme",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "sinch",
+    "number-lookup",
+    "phone-validation",
+    "phone-verification",
+    "carrier-lookup",
+    "sim-swap",
+    "voip-detection",
+    "e164"
+  ],
   "author": { "name": "Patryk Mazur", "email": "patryk.mazur@sinch.com" },
   "repository": {
     "type": "git",
-    "url": "https://github.com/"
+    "url": "https://github.com/sinch/n8n-nodes-number-lookup-api.git"
   },
   "scripts": {
     "build": "n8n-node build",

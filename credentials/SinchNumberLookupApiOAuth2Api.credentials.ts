@@ -7,18 +7,9 @@ export class SinchNumberLookupApiOAuth2Api implements ICredentialType {
 
 	displayName = 'Sinch Number Lookup Api OAuth2 API';
 
-	// Link to your community node's README
-	documentationUrl = 'https://github.com/org/@sinch/-number-lookup-api?tab=readme-ov-file#credentials';
+	documentationUrl = 'https://developers.sinch.com/docs/number-lookup-api-v2/api-reference/authentication/oauth';
 
 	properties: INodeProperties[] = [
-		{
-			displayName: 'Project ID',
-			name: 'projectId',
-			type: 'string',
-			default: '',
-			required: true,
-			description: 'Your Sinch project ID',
-		},
 		{
 			displayName: 'Grant Type',
 			name: 'grantType',

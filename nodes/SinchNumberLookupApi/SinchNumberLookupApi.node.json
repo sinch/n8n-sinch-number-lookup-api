@@ -6,12 +6,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://github.com/org/repo?tab=readme-ov-file#credentials"
+				"url": "https://developers.sinch.com/docs/number-lookup-api-v2/api-reference/authentication/oauth"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://github.com/org/repo?tab=readme-ov-file"
+				"url": "https://developers.sinch.com/docs/number-lookup-api-v2"
 			}
 		]
 	}
