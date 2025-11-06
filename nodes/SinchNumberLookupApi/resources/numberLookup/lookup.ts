@@ -2,7 +2,6 @@ import type { INodeProperties } from 'n8n-workflow';
 
 const showOnlyForLookup = {
 	operation: ['lookup'],
-	resource: ['numberLookup'],
 };
 
 const showOnlyWhenRndSelected = {

@@ -8,7 +8,7 @@ export class SinchNumberLookupApi implements INodeType {
 		icon: 'file:sinch_logotype_black.svg',
 		group: ['transform'],
 		version: 1,
-		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
+		subtitle: '={{$parameter["operation"]}}',
 		description: 'Interact with the Sinch Number Lookup Api API',
 		defaults: {
 			name: 'Sinch Number Lookup Api',
@@ -32,19 +32,7 @@ export class SinchNumberLookupApi implements INodeType {
 				default: '',
 				required: true,
 				description: 'Your Sinch project ID',
-			},
-			{
-				displayName: 'Resource',
-				name: 'resource',
-				type: 'options',
-				noDataExpression: true,
-				options: [
-					{
-						name: 'Number Lookup',
-						value: 'numberLookup',
-					},
-				],
-				default: 'numberLookup',
+				placeholder: '395fcbf6-20d6-4e76-8242-77106018e197',
 			},
 			...numberLookupOperations,
 		],

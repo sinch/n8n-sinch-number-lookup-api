@@ -1,19 +1,12 @@
 import type { INodeProperties } from 'n8n-workflow';
 import { numberLookupDescription } from './lookup';
 
-const showOnlyForNumberLookup = {
-	resource: ['numberLookup'],
-};
-
 export const numberLookupOperations: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
-		displayOptions: {
-			show: showOnlyForNumberLookup,
-		},
 		options: [
 			{
 				name: 'Lookup',
@@ -24,29 +17,30 @@ export const numberLookupOperations: INodeProperties[] = [
 					request: {
 						method: 'POST',
 						url: '=/v2/projects/{{$parameter.projectId}}/lookups/',
-						body: {
-							number: '={{$parameter.number}}',
-							features: '={{$parameter.features}}',
-							'={{$parameter.features.includes("RND") ? "rndFeatureOptions" : null}}': '={{$parameter.features.includes("RND") ? { contactDate: $parameter.contactDate.split("T")[0] } : undefined}}',
-						},
 					},
 					send: {
 						preSend: [
 							async function(this, requestOptions) {
-								// Clean up the body - remove null keys and format properly
+								const number = this.getNodeParameter('number') as string;
+								const features = this.getNodeParameter('features') as string[];
+								
+								if (!number.match(/^\+[1-9]\d{1,14}$/)) {
+									throw new Error(
+										`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +48530645813)`,
+									);
+								}
+								
 								const body: {
 									number: string;
 									features: string[];
 									rndFeatureOptions?: { contactDate: string };
 								} = {
-									number: this.getNodeParameter('number') as string,
-									features: this.getNodeParameter('features') as string[],
+									number,
+									features,
 								};
 								
-								// Add RND options if RND feature is selected
-								if (body.features.includes('RND')) {
+								if (features.includes('RND')) {
 									const contactDate = this.getNodeParameter('contactDate') as string;
-									// Extract date in YYYY-MM-DD format
 									const dateOnly = contactDate.split('T')[0];
 									body.rndFeatureOptions = {
 										contactDate: dateOnly,
