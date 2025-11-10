@@ -18,8 +18,8 @@ export const numberLookupDescription: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'The phone number to lookup in E.164 format (must start with + followed by country code and number)',
-		placeholder: '+48530645813',
-		hint: 'Must be in E.164 format: +[country code][number] (e.g., +48530645813)',
+		placeholder: '+1234567890',
+		hint: 'Must be in E.164 format: +[country code][number] (e.g., +1234567890)',
 	},
 	{
 		displayName: 'Features',

@@ -5,11 +5,11 @@ export class SinchNumberLookupApi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Sinch Number Lookup Api',
 		name: 'sinchNumberLookupApi',
-		icon: 'file:sinch_logotype_black.svg',
+		icon: 'file:sinch_logo.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Interact with the Sinch Number Lookup Api API',
+		description: 'Interact with the Sinch Number Lookup API',
 		defaults: {
 			name: 'Sinch Number Lookup Api',
 		},

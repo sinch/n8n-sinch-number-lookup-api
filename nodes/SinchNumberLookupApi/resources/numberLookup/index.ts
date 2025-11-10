@@ -77,7 +77,7 @@ export const numberLookupOperations: INodeProperties[] = [
 								
 								if (!number.match(/^\+[1-9]\d{1,14}$/)) {
 									throw new Error(
-										`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +48530645813)`,
+										`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +1234567890)`,
 									);
 								}
 								
