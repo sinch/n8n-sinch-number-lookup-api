@@ -22,6 +22,7 @@ export class SinchNumberLookupApi implements INodeType {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				'X-Source': 'n8n',
 			},
 		},
 		properties: [
