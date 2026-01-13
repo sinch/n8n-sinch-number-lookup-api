@@ -43,7 +43,7 @@ This node uses OAuth2 (Client Credentials) authentication. To set up credentials
 
 1. In n8n, create new credentials of type "Sinch Number Lookup Api OAuth2 API"
 2. Fill in the following fields:
-   - **Project ID**: Your Sinch project ID (UUID format, e.g., `395fcbf6-20d6-4e76-8242-77106018e197`)
+   - **Project ID**: Your Sinch project ID (UUID format, e.g., `395fcbf6-20d6-4e76-8242-77106018e191`)
    - **Client ID**: Your access key ID from Sinch Dashboard
    - **Client Secret**: Your access key secret from Sinch Dashboard
 3. Click "Connect" to authenticate
@@ -61,7 +61,7 @@ This node has been tested with **n8n v1.0+** and uses the n8n nodes API v1.
 1. Add the **Sinch Number Lookup Api** node to your workflow
 2. Configure your credentials
 3. Enter your **Project ID** (the UUID of your Sinch project)
-4. Enter a phone number in **E.164 format** (e.g., `+48530645813`)
+4. Enter a phone number in **E.164 format** (e.g., `+48123321123`)
    - Must start with `+` followed by country code and number
    - No spaces, dashes, or other formatting
 5. Select one or more **Features** to query
@@ -121,7 +121,7 @@ The node returns comprehensive information about the queried number:
 ## Resources
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
-* [Sinch Number Lookup API Documentation](https://developers.sinch.com/docs/number-lookup/)
+* [Sinch Number Lookup API Documentation](https://developers.sinch.com/docs/number-lookup-api-v2)
 * [Sinch Dashboard](https://dashboard.sinch.com/)
-* [Sinch API Reference](https://developers.sinch.com/reference/number-lookup-api/)
+* [Sinch API Reference](https://developers.sinch.com/docs/number-lookup-api-v2/api-reference/number-lookup-v2/numberlookupv2)
 * [Get Support](https://www.sinch.com/contact-us/)
