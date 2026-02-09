@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { NodeApiError, NodeOperationError } from 'n8n-workflow';
 import { numberLookupDescription } from './lookup';
 
 export const numberLookupOperations: INodeProperties[] = [
@@ -60,26 +61,31 @@ export const numberLookupOperations: INodeProperties[] = [
 										message = 'Internal Server Error';
 										description = 'An error occurred on the Sinch API server. Please try again later.';
 										break;
-									default:
-										message = `API Error (${responseData.statusCode})`;
-										description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
-								}
-								
-								throw new Error(`${message}: ${description}`);
+							default:
+								message = `API Error (${responseData.statusCode})`;
+								description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
+						}
+						
+						throw new NodeApiError(this.getNode(), errorBody || {}, {
+							message,
+							description,
+							httpCode: String(responseData.statusCode),
+						});
 							},
 						],
 					},
 					send: {
 						preSend: [
 							async function(this, requestOptions) {
-								const number = this.getNodeParameter('number') as string;
-								const features = this.getNodeParameter('features') as string[];
-								
-								if (!number.match(/^\+[1-9]\d{1,14}$/)) {
-									throw new Error(
-										`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +1234567890)`,
-									);
-								}
+							const number = this.getNodeParameter('number') as string;
+							const features = this.getNodeParameter('features') as string[];
+							
+							if (!number.match(/^\+[1-9]\d{1,14}$/)) {
+								throw new NodeOperationError(
+									this.getNode(),
+									`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +1234567890)`,
+								);
+							}
 								
 								const body: {
 									number: string;
