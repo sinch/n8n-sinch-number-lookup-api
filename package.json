@@ -1,6 +1,6 @@
 {
   "name": "@sinch/n8n-nodes-number-lookup-api",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "n8n community node for Sinch Number Lookup API - validate and verify phone numbers with real-time carrier, porting, SIM swap, and VoIP detection",
   "license": "MIT",
   "homepage": "https://github.com/sinch/n8n-sinch-number-lookup-api?tab=readme-ov-file#",
