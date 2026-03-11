@@ -2,6 +2,9 @@ name: Publish to npm
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - NLOOK-739
 
 jobs:
   publish:
