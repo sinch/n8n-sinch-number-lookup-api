@@ -9,6 +9,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -28,4 +31,4 @@ jobs:
         run: npm run build
 
       - name: Publish to npm (dry run)
-        run: npm publish --access public --dry-run
+        run: npm pkg delete scripts.prepublishOnly && npm publish --provenance --access public --dry-run
