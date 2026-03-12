@@ -2,16 +2,20 @@ name: Publish to npm
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - NLOOK-739
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -22,13 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run lint
-        run: npm run lint
-
-      - name: Run build
-        run: npm run build
-
-      - name: Publish to npm
-        run: npm pkg delete scripts.prepublishOnly && npm publish --provenance --access public
+      - name: Release
+        run: npm run release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
