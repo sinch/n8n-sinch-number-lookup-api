@@ -8,6 +8,11 @@ export const numberLookupOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['numberLookup'],
+			},
+		},
 		options: [
 			{
 				name: 'Lookup',
@@ -23,15 +28,15 @@ export const numberLookupOperations: INodeProperties[] = [
 					},
 					output: {
 						postReceive: [
-							async function(this, items, responseData) {
+							async function (this, items, responseData) {
 								if (responseData.statusCode >= 200 && responseData.statusCode < 300) {
 									return items;
 								}
-								
+
 								const errorBody = responseData.body;
 								let message = 'API request failed';
 								let description = errorBody?.detail || errorBody?.title || 'Unknown error';
-								
+
 								switch (responseData.statusCode) {
 									case 400:
 										message = 'Invalid Request';
@@ -61,32 +66,32 @@ export const numberLookupOperations: INodeProperties[] = [
 										message = 'Internal Server Error';
 										description = 'An error occurred on the Sinch API server. Please try again later.';
 										break;
-							default:
-								message = `API Error (${responseData.statusCode})`;
-								description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
-						}
-						
-						throw new NodeApiError(this.getNode(), errorBody || {}, {
-							message,
-							description,
-							httpCode: String(responseData.statusCode),
-						});
+									default:
+										message = `API Error (${responseData.statusCode})`;
+										description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
+								}
+
+								throw new NodeApiError(this.getNode(), errorBody || {}, {
+									message,
+									description,
+									httpCode: String(responseData.statusCode),
+								});
 							},
 						],
 					},
 					send: {
 						preSend: [
-							async function(this, requestOptions) {
-							const number = this.getNodeParameter('number') as string;
-							const features = this.getNodeParameter('features') as string[];
-							
-							if (!number.match(/^\+[1-9]\d{1,14}$/)) {
-								throw new NodeOperationError(
-									this.getNode(),
-									`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +1234567890)`,
-								);
-							}
-								
+							async function (this, requestOptions) {
+								const number = this.getNodeParameter('number') as string;
+								const features = this.getNodeParameter('features') as string[];
+
+								if (!number.match(/^\+[1-9]\d{1,14}$/)) {
+									throw new NodeOperationError(
+										this.getNode(),
+										`Invalid phone number format: "${number}". Must be in E.164 format (e.g., +1234567890)`,
+									);
+								}
+
 								const body: {
 									number: string;
 									features: string[];
@@ -95,7 +100,7 @@ export const numberLookupOperations: INodeProperties[] = [
 									number,
 									features,
 								};
-								
+
 								if (features.includes('RND')) {
 									const contactDate = this.getNodeParameter('contactDate') as string;
 									const dateOnly = contactDate.split('T')[0];
@@ -103,7 +108,7 @@ export const numberLookupOperations: INodeProperties[] = [
 										contactDate: dateOnly,
 									};
 								}
-								
+
 								requestOptions.body = body;
 								return requestOptions;
 							},
@@ -114,5 +119,6 @@ export const numberLookupOperations: INodeProperties[] = [
 		],
 		default: 'lookup',
 	},
-	...numberLookupDescription,
 ];
+
+export const numberLookupProperties: INodeProperties[] = numberLookupDescription;

@@ -1,5 +1,5 @@
 import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
-import { numberLookupOperations } from './resources/numberLookup';
+import { numberLookupOperations, numberLookupProperties } from './resources/numberLookup';
 
 const version = 1;
 
@@ -10,7 +10,7 @@ export class SinchNumberLookupApi implements INodeType {
 		icon: 'file:sinch_logo.svg',
 		group: ['transform'],
 		version: version,
-		subtitle: '={{$parameter["operation"]}}',
+		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
 		description: 'Interact with the Sinch Number Lookup API',
 		defaults: {
 			name: 'Sinch Number Lookup Api',
@@ -38,7 +38,21 @@ export class SinchNumberLookupApi implements INodeType {
 				description: 'Your Sinch project ID',
 				placeholder: '395fcbf6-20d6-4e76-8242-77106018e197',
 			},
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Number Lookup',
+						value: 'numberLookup',
+					},
+				],
+				default: 'numberLookup',
+			},
 			...numberLookupOperations,
+			...numberLookupProperties,
 		],
 	};
 }
