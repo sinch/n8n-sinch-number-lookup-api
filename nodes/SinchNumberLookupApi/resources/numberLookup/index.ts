@@ -28,7 +28,7 @@ export const numberLookupOperations: INodeProperties[] = [
 					},
 					output: {
 						postReceive: [
-							async function(this, items, responseData) {
+							async function (this, items, responseData) {
 								if (responseData.statusCode >= 200 && responseData.statusCode < 300) {
 									return items;
 								}
@@ -66,22 +66,22 @@ export const numberLookupOperations: INodeProperties[] = [
 										message = 'Internal Server Error';
 										description = 'An error occurred on the Sinch API server. Please try again later.';
 										break;
-						default:
-							message = `API Error (${responseData.statusCode})`;
-							description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
-					}
+									default:
+										message = `API Error (${responseData.statusCode})`;
+										description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
+								}
 
-					throw new NodeApiError(this.getNode(), errorBody || {}, {
-						message,
-						description,
-						httpCode: String(responseData.statusCode),
-					});
-								},
-							],
-						},
-						send: {
-							preSend: [
-								async function(this, requestOptions) {
+								throw new NodeApiError(this.getNode(), errorBody || {}, {
+									message,
+									description,
+									httpCode: String(responseData.statusCode),
+								});
+							},
+						],
+					},
+					send: {
+						preSend: [
+							async function (this, requestOptions) {
 								const number = this.getNodeParameter('number') as string;
 								const features = this.getNodeParameter('features') as string[];
 
@@ -92,31 +92,31 @@ export const numberLookupOperations: INodeProperties[] = [
 									);
 								}
 
-									const body: {
-										number: string;
-										features: string[];
-										rndFeatureOptions?: { contactDate: string };
-									} = {
-										number,
-										features,
+								const body: {
+									number: string;
+									features: string[];
+									rndFeatureOptions?: { contactDate: string };
+								} = {
+									number,
+									features,
+								};
+
+								if (features.includes('RND')) {
+									const contactDate = this.getNodeParameter('contactDate') as string;
+									const dateOnly = contactDate.split('T')[0];
+									body.rndFeatureOptions = {
+										contactDate: dateOnly,
 									};
+								}
 
-									if (features.includes('RND')) {
-										const contactDate = this.getNodeParameter('contactDate') as string;
-										const dateOnly = contactDate.split('T')[0];
-										body.rndFeatureOptions = {
-											contactDate: dateOnly,
-										};
-									}
-
-									requestOptions.body = body;
-									return requestOptions;
-								},
-							],
-						},
+								requestOptions.body = body;
+								return requestOptions;
+							},
+						],
 					},
 				},
-			],
+			},
+		],
 		default: 'lookup',
 	},
 ];
