@@ -42,5 +42,5 @@ export class SinchNumberLookupApiOAuth2Api implements ICredentialType {
 		},
 	];
 
-	icon = undefined;
+	icon = 'file:sinch_logo.svg';
 }
