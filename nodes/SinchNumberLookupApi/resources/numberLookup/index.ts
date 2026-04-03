@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+import type { INodeProperties, JsonObject } from 'n8n-workflow';
 import { NodeApiError, NodeOperationError } from 'n8n-workflow';
 import { numberLookupDescription } from './lookup';
 
@@ -33,7 +33,7 @@ export const numberLookupOperations: INodeProperties[] = [
 									return items;
 								}
 
-								const errorBody = responseData.body;
+								const errorBody = responseData.body as { detail?: string; title?: string } | undefined;
 								let message = 'API request failed';
 								let description = errorBody?.detail || errorBody?.title || 'Unknown error';
 
@@ -71,7 +71,7 @@ export const numberLookupOperations: INodeProperties[] = [
 										description = errorBody?.detail || errorBody?.title || 'An unexpected error occurred';
 								}
 
-								throw new NodeApiError(this.getNode(), errorBody || {}, {
+								throw new NodeApiError(this.getNode(), responseData as unknown as JsonObject, {
 									message,
 									description,
 									httpCode: String(responseData.statusCode),

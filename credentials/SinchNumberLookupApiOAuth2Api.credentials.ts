@@ -1,4 +1,4 @@
-import type { ICredentialType, INodeProperties } from 'n8n-workflow';
+import type { ICredentialType, INodeProperties, Icon } from 'n8n-workflow';
 
 export class SinchNumberLookupApiOAuth2Api implements ICredentialType {
 	name = 'sinchNumberLookupApiOAuth2Api';
@@ -42,5 +42,5 @@ export class SinchNumberLookupApiOAuth2Api implements ICredentialType {
 		},
 	];
 
-	icon = 'file:sinch_logo.svg';
+	icon: Icon = 'file:sinch_logo.svg';
 }
