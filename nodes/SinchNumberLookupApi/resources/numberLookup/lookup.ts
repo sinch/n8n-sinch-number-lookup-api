@@ -34,6 +34,11 @@ export const numberLookupDescription: INodeProperties[] = [
 				description: 'Get the type of line (mobile, landline, etc.)',
 			},
 			{
+				name: 'RND (Reassigned Number Database)',
+				value: 'RND',
+				description: 'Check if the number has been reassigned to a new subscriber',
+			},
+			{
 				name: 'SIM Swap',
 				value: 'SimSwap',
 				description: 'Detect if the SIM card has been swapped recently',
@@ -42,11 +47,6 @@ export const numberLookupDescription: INodeProperties[] = [
 				name: 'VoIP Detection',
 				value: 'VoIPDetection',
 				description: 'Check if the number is a VoIP (Voice over IP) number',
-			},
-			{
-				name: 'RND (Reassigned Number Database)',
-				value: 'RND',
-				description: 'Check if the number has been reassigned to a new subscriber',
 			},
 		],
 		default: ['LineType'],
