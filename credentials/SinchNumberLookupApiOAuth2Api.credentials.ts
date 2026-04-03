@@ -5,7 +5,7 @@ export class SinchNumberLookupApiOAuth2Api implements ICredentialType {
 
 	extends = ['oAuth2Api'];
 
-	displayName = 'Sinch Number Lookup Api OAuth2 API';
+	displayName = 'Sinch Number Lookup API OAuth2 API';
 
 	documentationUrl = 'https://developers.sinch.com/docs/number-lookup-api-v2/api-reference/authentication/oauth';
 
