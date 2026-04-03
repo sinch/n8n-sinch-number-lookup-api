@@ -5,7 +5,7 @@ const version = 1;
 
 export class SinchNumberLookupApi implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Sinch Number Lookup Api',
+		displayName: 'Sinch Number Lookup API',
 		name: 'sinchNumberLookupApi',
 		icon: 'file:sinch_logo.svg',
 		group: ['transform'],
@@ -13,7 +13,7 @@ export class SinchNumberLookupApi implements INodeType {
 		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
 		description: 'Interact with the Sinch Number Lookup API',
 		defaults: {
-			name: 'Sinch Number Lookup Api',
+			name: 'Sinch Number Lookup API',
 		},
 		usableAsTool: true,
 		inputs: [NodeConnectionTypes.Main],
